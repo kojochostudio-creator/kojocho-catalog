@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Public URL is not configured for this local PoC. -->
+  <url>
+    <loc>https://kojochostudio-creator.github.io/kojocho-catalog/</loc>
+  </url>
 </urlset>
