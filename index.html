@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Browse KojochoStudio Japanese game assets: transparent PNG props, workshop sets, RPG & UI icons, bundles, and pixel art.">
+    <title>KojochoStudio Catalog</title>
+    <link rel="stylesheet" href="assets/css/site.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="hero">
+        <p class="eyebrow">KojochoStudio</p>
+        <h1>Japanese Game Assets</h1>
+        <p class="intro">Japanese-inspired transparent PNG assets<br>for games and creative projects.</p>
+        <a class="browse-button" href="#collections">Browse Collections</a>
+      </div>
+    </header>
+    <main class="catalog-wrap">
+      <section class="catalog-section featured-section" aria-labelledby="featured-heading">
+        <div class="section-heading">
+          <p class="section-kicker">Selected collection</p>
+          <h2 id="featured-heading">Featured Assets</h2>
+        </div>
+        <div class="feature-layout">
+          <div id="main-feature" aria-label="Main feature"></div>
+          <div id="secondary-features" class="secondary-features" aria-label="Secondary features"></div>
+        </div>
+      </section>
+
+      <section id="collections" class="catalog-section browse-section" aria-labelledby="browse-heading">
+        <div class="section-heading">
+          <p class="section-kicker">Explore the collection</p>
+          <h2 id="browse-heading">Browse Collections</h2>
+        </div>
+        <div id="collection-filters" class="category-filters" aria-label="Product collections"></div>
+      </section>
+
+      <section class="catalog-section shelf-section" aria-labelledby="bundles-heading">
+        <div class="section-heading"><p class="section-kicker">More to explore</p><h2 id="bundles-heading">Bundles</h2></div>
+        <div id="shelf-bundles" class="shelf-grid shelf-grid-emphasis" aria-label="Bundles"></div>
+      </section>
+
+      <section class="catalog-section shelf-section" aria-labelledby="icons-heading">
+        <div class="section-heading"><p class="section-kicker">For game interfaces</p><h2 id="icons-heading">RPG &amp; UI Icons</h2></div>
+        <div id="shelf-rpg-ui-icons" class="shelf-grid" aria-label="RPG and UI icons"></div>
+      </section>
+
+      <section class="catalog-section shelf-section" aria-labelledby="props-heading">
+        <div class="section-heading"><p class="section-kicker">Japanese-inspired details</p><h2 id="props-heading">Japanese Props</h2></div>
+        <div id="shelf-japanese-props" class="shelf-grid" aria-label="Japanese props"></div>
+      </section>
+
+      <section class="catalog-section shelf-section" aria-labelledby="workshops-heading">
+        <div class="section-heading"><p class="section-kicker">Build a world</p><h2 id="workshops-heading">Workshops &amp; Shops</h2></div>
+        <div id="shelf-workshops-shops" class="shelf-grid" aria-label="Workshops and shops"></div>
+      </section>
+
+      <section class="catalog-section shelf-section" aria-labelledby="releases-heading">
+        <div class="section-heading"><p class="section-kicker">Latest additions</p><h2 id="releases-heading">New Releases</h2></div>
+        <div id="shelf-new-releases" class="shelf-grid" aria-label="New releases"></div>
+      </section>
+
+      <section id="selected-assets" class="catalog-section" aria-labelledby="all-assets-heading">
+        <div class="section-heading section-heading-row">
+          <div>
+            <p class="section-kicker">Current public assortment</p>
+            <h2 id="all-assets-heading">Selected Assets</h2>
+          </div>
+          <p id="catalog-status" class="status" aria-live="polite">Loading products…</p>
+        </div>
+        <div id="product-list" class="product-grid" aria-label="Selected assets"></div>
+        <button id="explore-toggle" class="explore-toggle" type="button" hidden>View All Selected Assets</button>
+      </section>
+    </main>
+    <script src="assets/js/catalog.js"></script>
+  </body>
+</html>

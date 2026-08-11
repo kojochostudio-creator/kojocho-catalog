@@ -1,0 +1,39 @@
+{
+  "collections": [
+    {
+      "id": "bundles",
+      "label": "Bundles",
+      "product_ids": [96, 91, 90, 87]
+    },
+    {
+      "id": "rpg-ui-icons",
+      "label": "RPG & UI Icons",
+      "product_ids": [91, 92, 60, 57, 53, 52]
+    },
+    {
+      "id": "japanese-props",
+      "label": "Japanese Props",
+      "product_ids": [101, 100, 97, 90, 87, 84]
+    },
+    {
+      "id": "workshops-shops",
+      "label": "Workshops & Shops",
+      "product_ids": [99, 98, 96, 95, 94, 93, 89]
+    },
+    {
+      "id": "scenes-interiors",
+      "label": "Scenes & Interiors",
+      "product_ids": [101, 84]
+    },
+    {
+      "id": "pixel-art",
+      "label": "Pixel Art",
+      "product_ids": [43]
+    },
+    {
+      "id": "new-releases",
+      "label": "New Releases",
+      "uses_site_config_new_release_ids": true
+    }
+  ]
+}

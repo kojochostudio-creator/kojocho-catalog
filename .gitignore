@@ -1,0 +1,7 @@
+tools/
+*.db
+*.sqlite
+*.sqlite3
+*.zip
+__pycache__/
+*.pyc
