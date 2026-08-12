@@ -123,6 +123,29 @@ h1 { margin: 0; font-size: clamp(2.25rem, 5.2vw, 3.7rem); letter-spacing: -.03em
 }
 .explore-toggle:hover, .explore-toggle:focus-visible { color: #fff; background: #4f3922; }
 
+.site-footer {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 1.25rem 2.5rem;
+  color: #5c554b;
+  font-size: .9rem;
+}
+.site-footer a { color: #5e452d; font-weight: 700; }
+.site-footer a:hover, .site-footer a:focus-visible { color: #2c241b; }
+
+.faq-wrap { max-width: 900px; }
+.faq-list { display: grid; gap: 1rem; }
+.faq-item {
+  padding: clamp(1rem, 2vw, 1.35rem);
+  border: 1px solid #ddd8cf;
+  border-radius: .75rem;
+  background: #fffdf9;
+  box-shadow: 0 2px 8px rgba(37, 32, 25, .05);
+}
+.faq-item h2 { margin: 0; color: #2b2823; font-size: clamp(1.05rem, 2vw, 1.2rem); line-height: 1.4; }
+.faq-item p { max-width: 70ch; margin: .65rem 0 0; color: #514b43; line-height: 1.65; }
+.faq-note { max-width: 70ch; margin: 1.5rem 0 0; color: #5c554b; font-size: .92rem; line-height: 1.6; }
+
 @media (max-width: 1100px) {
   .shelf-grid, .shelf-grid-emphasis, .product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
@@ -136,6 +159,7 @@ h1 { margin: 0; font-size: clamp(2.25rem, 5.2vw, 3.7rem); letter-spacing: -.03em
 @media (max-width: 520px) {
   .site-header { padding: 2.35rem 1rem; }
   .catalog-wrap { padding: 2rem 1rem 3rem; }
+  .site-footer { padding: 0 1rem 2rem; }
   .catalog-section + .catalog-section { margin-top: 3.25rem; }
   .section-heading-row { align-items: start; flex-direction: column; }
   .shelf-grid, .shelf-grid-emphasis, .product-grid { grid-template-columns: 1fr; }
