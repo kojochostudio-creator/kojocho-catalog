@@ -10,6 +10,13 @@
   var selectedProducts = [];
   var selectedIsAll = true;
   var exploreExpanded = false;
+  var productPages = new Map([
+    [91, "rpg-icons-bundle"],
+    [92, "grimoires-arcane-research"],
+    [96, "workshop-props-bundle"],
+    [98, "sake-brewery-props"],
+    [101, "showa-retro-sento-props"]
+  ]);
 
   function text(element, value) {
     element.textContent = value;
@@ -46,6 +53,14 @@
     prices.className = "prices";
     text(prices, "BOOTH: " + product.booth_price + "  |  itch.io: " + product.itch_price);
     content.appendChild(prices);
+    var productPageSlug = productPages.get(product.id);
+    if (productPageSlug) {
+      var detail = document.createElement("a");
+      detail.className = "product-detail-link";
+      detail.href = "products/" + productPageSlug + "/";
+      text(detail, "View details");
+      content.appendChild(detail);
+    }
     var links = document.createElement("div");
     links.className = "store-links";
     links.appendChild(storeLink("BOOTH · JPY", product.booth_url));
