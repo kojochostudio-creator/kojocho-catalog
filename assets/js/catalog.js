@@ -32,6 +32,26 @@
     return text(link, label);
   }
 
+  function hasValue(value) {
+    return typeof value === "string" && value.trim() !== "";
+  }
+
+  function appendMarketplacePrice(prices, label, price, url) {
+    if (!hasValue(url)) return;
+    var value = hasValue(price) ? price : "See store";
+    var separator = prices.childNodes.length ? "  |  " : "";
+    prices.appendChild(document.createTextNode(separator + label + ": " + value));
+  }
+
+  function appendOptionalSamplerLinks(links, product) {
+    if (hasValue(product.free_demo_url)) {
+      links.appendChild(storeLink("Free sampler (itch.io)", product.free_demo_url));
+    }
+    if (hasValue(product.booth_sampler_url)) {
+      links.appendChild(storeLink("Free sampler (BOOTH)", product.booth_sampler_url));
+    }
+  }
+
   function productCard(product, collectionLabel, variant) {
     var card = document.createElement("article");
     card.className = "product-card" + (variant ? " " + variant : "");
@@ -51,7 +71,8 @@
     content.appendChild(text(document.createElement("p"), product.title_jp)).className = "title-jp";
     var prices = document.createElement("p");
     prices.className = "prices";
-    text(prices, "BOOTH: " + product.booth_price + "  |  itch.io: " + product.itch_price);
+    appendMarketplacePrice(prices, "BOOTH", product.booth_price, product.booth_url);
+    appendMarketplacePrice(prices, "itch.io", product.itch_price, product.itch_url);
     content.appendChild(prices);
     var productPageSlug = productPages.get(product.id);
     if (productPageSlug) {
@@ -63,8 +84,9 @@
     }
     var links = document.createElement("div");
     links.className = "store-links";
-    links.appendChild(storeLink("BOOTH · JPY", product.booth_url));
-    links.appendChild(storeLink("itch.io · USD", product.itch_url));
+    if (hasValue(product.booth_url)) links.appendChild(storeLink("BOOTH · JPY", product.booth_url));
+    if (hasValue(product.itch_url)) links.appendChild(storeLink("itch.io · USD", product.itch_url));
+    appendOptionalSamplerLinks(links, product);
     content.appendChild(links);
     card.appendChild(content);
     return card;
@@ -190,7 +212,14 @@
           products: collectionProducts(collection, config, byId)
         };
       });
-      if (collections.length !== 7) throw new Error("expected seven customer collections");
+      var collectionIds = collections.map(function (collection) { return collection.id; });
+      if (collectionIds.some(function (id) { return !hasValue(id); }) ||
+          new Set(collectionIds).size !== collectionIds.length) {
+        throw new Error("collection IDs must be nonempty and unique");
+      }
+      ["bundles", "rpg-ui-icons", "japanese-props", "workshops-shops", "scenes-interiors", "pixel-art", "new-releases"].forEach(function (id) {
+        if (collectionIds.indexOf(id) === -1) throw new Error("required collection is absent: " + id);
+      });
 
       var features = validateFeatures(config, byId);
       var mainCollection = collections.find(function (collection) {

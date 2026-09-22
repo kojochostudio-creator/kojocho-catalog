@@ -26,6 +26,26 @@
     return text(link, label);
   }
 
+  function hasValue(value) {
+    return typeof value === "string" && value.trim() !== "";
+  }
+
+  function appendMarketplacePrice(prices, label, price, url) {
+    if (!hasValue(url)) return;
+    var value = hasValue(price) ? price : "See store";
+    var separator = prices.childNodes.length ? "  |  " : "";
+    prices.appendChild(document.createTextNode(separator + label + ": " + value));
+  }
+
+  function appendOptionalSamplerLinks(links, product) {
+    if (hasValue(product.free_demo_url)) {
+      links.appendChild(storeLink("Free sampler (itch.io)", product.free_demo_url));
+    }
+    if (hasValue(product.booth_sampler_url)) {
+      links.appendChild(storeLink("Free sampler (BOOTH)", product.booth_sampler_url));
+    }
+  }
+
   function productCard(product) {
     var card = document.createElement("article");
     card.className = "product-card";
@@ -40,7 +60,8 @@
     content.appendChild(text(document.createElement("p"), product.title_jp)).className = "title-jp";
     var prices = document.createElement("p");
     prices.className = "prices";
-    text(prices, "BOOTH: " + product.booth_price + "  |  itch.io: " + product.itch_price);
+    appendMarketplacePrice(prices, "BOOTH", product.booth_price, product.booth_url);
+    appendMarketplacePrice(prices, "itch.io", product.itch_price, product.itch_url);
     content.appendChild(prices);
     var productPageSlug = productPages.get(product.id);
     if (productPageSlug) {
@@ -52,8 +73,9 @@
     }
     var links = document.createElement("div");
     links.className = "store-links";
-    links.appendChild(storeLink("BOOTH", product.booth_url));
-    links.appendChild(storeLink("itch.io", product.itch_url));
+    if (hasValue(product.booth_url)) links.appendChild(storeLink("BOOTH", product.booth_url));
+    if (hasValue(product.itch_url)) links.appendChild(storeLink("itch.io", product.itch_url));
+    appendOptionalSamplerLinks(links, product);
     content.appendChild(links);
     card.appendChild(content);
     return card;
@@ -71,7 +93,9 @@
       if (!collection || !Array.isArray(collection.product_ids)) throw new Error("collection unavailable");
       var byId = new Map(products.map(function (product) { return [product.id, product]; }));
       var selected = collection.product_ids.map(function (id) { return byId.get(id); });
-      if (selected.some(function (product) { return !product || !product.booth_url || !product.itch_url || !product.cover_image; })) {
+      if (selected.some(function (product) {
+        return !product || (!hasValue(product.booth_url) && !hasValue(product.itch_url)) || !product.cover_image;
+      })) {
         throw new Error("collection product unavailable");
       }
       selected.forEach(function (product) { target.appendChild(productCard(product)); });
