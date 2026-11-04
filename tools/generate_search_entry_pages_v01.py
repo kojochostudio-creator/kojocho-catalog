@@ -106,6 +106,42 @@ def card(p, free_page=False):
 def render(slug, selected):
     p = PAGES[slug]
     cards = "\n".join(card(product, slug == "free-game-assets") for product in selected)
+    spotlight = ''
+    if slug == '3d-assets':
+        spotlight = '''
+<section class="catalog-section fab-onsen-spotlight" aria-labelledby="featured-fab-onsen">
+      <div class="section-heading"><h2 id="featured-fab-onsen">New on Fab: Japanese Onsen &amp; Ryokan Bath Props</h2></div>
+      <div class="product-grid">
+        <article class="product-card">
+          <img src="../assets/images/fab_onsen_bath_demo.png" alt="Japanese onsen bath area assembled using shower fixtures, wooden bath bucket, stool and wash bowls" loading="lazy">
+          <div class="product-content">
+            <p class="collection-label">Japanese bathhouse and changing-room scenes</p>
+            <h3 class="title-en">Japanese Onsen Bath &amp; Ryokan Changing Room Props — 25 GLB</h3>
+            <p>25 individual GLB model files across 10 prop families, plus 2 placement demo GLBs. Decorate onsen bath areas and ryokan changing rooms with wooden buckets, stools, showers, towels, yukata and more.</p>
+            <p>The shown bath-area setup uses included props and demo staging; it is not a complete ryokan building or environment.</p>
+            <div class="store-links">
+              <a class="store-link" href="https://www.fab.com/listings/a1d99ab5-a497-4ccc-8d5b-67dde348e146" target="_blank" rel="noopener noreferrer">View on Fab</a>
+              <a class="store-link" href="https://kojochostudio.itch.io/japanese-ryokan-onsen-3d-props#demo" target="_blank" rel="noopener noreferrer">Try a free 2-GLB sample</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>'''
+    fab_style = ''
+    if slug == '3d-assets':
+        fab_style = '''
+<style>
+.fab-onsen-spotlight .product-grid { grid-template-columns: minmax(0, 1fr); }
+.fab-onsen-spotlight .product-card { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(300px, 1fr); }
+.fab-onsen-spotlight .product-card img { height: 100%; object-fit: cover; }
+.fab-onsen-spotlight .product-content { padding: clamp(1.25rem, 3vw, 2.25rem); gap: .7rem; }
+.fab-onsen-spotlight .title-en { min-height: 0; font-size: clamp(1.25rem, 2.2vw, 1.8rem); }
+.fab-onsen-spotlight .product-content > p:not(.collection-label) { margin: .1rem 0; line-height: 1.65; }
+@media (max-width: 760px) {
+  .fab-onsen-spotlight .product-card { grid-template-columns: minmax(0, 1fr); }
+  .fab-onsen-spotlight .product-card img { height: auto; aspect-ratio: 16 / 9; }
+}
+</style>'''
     related = "\n".join(f'<a class="category-filter" href="../{s}/">{escape(LABELS[s])}</a>' for s in p["related"])
     return f'''<!doctype html>
 <html lang="en">
@@ -117,13 +153,13 @@ def render(slug, selected):
   <link rel="canonical" href="{BASE}{slug}/">
   <script async src="https://www.googletagmanager.com/gtag/js?id={GA}"></script>
   <script>window.dataLayer = window.dataLayer || []; function gtag(){{dataLayer.push(arguments);}} gtag('js', new Date()); gtag('config', '{GA}');</script>
-  <link rel="stylesheet" href="../assets/css/site.css">
+  <link rel="stylesheet" href="../assets/css/site.css">{fab_style}
 </head>
 <body>
   <header class="site-header"><div class="hero"><p class="eyebrow">KojochoStudio</p>
     <h1>{escape(p['heading'])}</h1><p class="intro">{escape(p['intro'])}</p>
     <a class="browse-button" href="../">Back to Catalog</a></div></header>
-  <main class="catalog-wrap">
+  <main class="catalog-wrap">{spotlight}
     <section class="catalog-section" aria-labelledby="collection-heading">
       <div class="section-heading section-heading-row"><h2 id="collection-heading">{escape(p['label'])}</h2><p class="status">{len(selected)} existing Catalog {'product' if len(selected) == 1 else 'products'}</p></div>
       <div class="product-grid" aria-label="{escape(p['label'])} products">
