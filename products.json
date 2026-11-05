@@ -1561,5 +1561,18 @@
     "cover_image": "assets/images/product_5037861_cover.png",
     "status": "PUBLISHED",
     "family": "Icon"
+  },
+  {
+    "id": 5282923,
+    "title_jp": "江戸商店街スターターキット",
+    "title_en": "Edo Merchant Street Starter Kit — 10 GLB",
+    "category": "3D / Edo Merchant Street",
+    "booth_price": "500 JPY",
+    "itch_price": "4.99 USD",
+    "booth_url": "https://kojo-cho-studio.booth.pm/items/9084626",
+    "itch_url": "https://kojochostudio.itch.io/edo-merchant-street-starter-kit",
+    "cover_image": "assets/images/product_5282923_cover.jpg",
+    "status": "PUBLISHED",
+    "family": "3D"
   }
 ]
